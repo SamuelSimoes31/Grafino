@@ -1,6 +1,6 @@
 graph = []
 let raio
-
+let selV
 
 class Vextex{
   constructor(x,y,l,r){
@@ -27,17 +27,34 @@ class Vextex{
   }
 }
 
-function mouseClicked(){
+function who(){
   let d
   for(let v of graph){
     d = dist(mouseX, mouseY,v.x, v.y);
-    if(d < raio){
-      v.setMode('selected')
-      return
-    }
+    if(d < raio) return v
   }
-   
-  graph.push(new Vextex(mouseX,mouseY,graph.length,raio))
+  return null
+}
+
+function mousePressed() {
+  selV = who()
+  if(selV) selV.mode = 'selected'
+}
+
+function mouseReleased(){
+  selV.mode = 'normal'
+}
+
+function mouseClicked(){
+  if(selV==null)
+    graph.push(new Vextex(mouseX,mouseY,graph.length,raio))
+}
+
+function mouseDragged() {
+  if(selV){
+    selV.x = mouseX
+    selV.y = mouseY
+  }
 }
 
 function displayVextex(){
@@ -49,6 +66,7 @@ function displayVextex(){
 function setup() {
   createCanvas(windowWidth,windowHeight);
   raio = windowHeight*0.025
+  selV = null
 }
 
 function draw() {
