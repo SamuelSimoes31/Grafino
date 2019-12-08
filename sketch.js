@@ -1,6 +1,7 @@
 graph = []
 let raio
 let selV
+let str
 
 const CANVAS_HEIGHT = 500
 const CANVAS_WIDTH = 500
@@ -28,6 +29,10 @@ class Vextex{
     textAlign(CENTER,CENTER);
     text(this.label,this.x,this.y)
   }
+}
+
+document.getElementById("add").onclick = function(){
+  str = "sisi"
 }
 
 function insideCanvas(){
@@ -72,6 +77,7 @@ function displayVextex(){
 }
 
 function setup() {
+  str = 'nono'
   createCanvas(CANVAS_WIDTH,CANVAS_HEIGHT);
   //createCanvas(500,500);
   raio = windowHeight*0.025
@@ -83,4 +89,5 @@ function draw() {
   displayVextex()
   text(mouseX,30,30)
   text(mouseY,30,40)
+  text(str,50,50)
 }
