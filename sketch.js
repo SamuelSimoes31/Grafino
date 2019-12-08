@@ -2,6 +2,9 @@ graph = []
 let raio
 let selV
 
+const CANVAS_HEIGHT = 500
+const CANVAS_WIDTH = 500
+
 class Vextex{
   constructor(x,y,l,r){
     this.x = x
@@ -27,6 +30,11 @@ class Vextex{
   }
 }
 
+function insideCanvas(){
+  if(mouseX < 0 || mouseY < 0 || mouseX > CANVAS_WIDTH || mouseY > CANVAS_HEIGHT) return false
+  else return true
+}
+
 function who(){
   let d
   for(let v of graph){
@@ -42,11 +50,11 @@ function mousePressed() {
 }
 
 function mouseReleased(){
-  selV.mode = 'normal'
+  //selV.mode = 'normal'
 }
 
 function mouseClicked(){
-  if(selV==null)
+  if(selV==null && insideCanvas())
     graph.push(new Vextex(mouseX,mouseY,graph.length,raio))
 }
 
@@ -64,12 +72,15 @@ function displayVextex(){
 }
 
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(CANVAS_WIDTH,CANVAS_HEIGHT);
+  //createCanvas(500,500);
   raio = windowHeight*0.025
   selV = null
 }
 
 function draw() {
-  background(250);
+  background(200);
   displayVextex()
+  text(mouseX,30,30)
+  text(mouseY,30,40)
 }
